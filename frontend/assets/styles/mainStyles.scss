@@ -1,0 +1,25 @@
+@import '_colors.css';
+@import '_devices.scss';
+@import 'styleReset.css';
+
+
+* div {
+    font-family: 'Roboto';
+    color: white;
+}
+
+.hideOnMobile {
+	display: none;
+}
+
+.wrapper {
+	width: min(100% - 6.4rem, 120rem);
+	margin-inline: auto;
+}
+
+#__nuxt {
+    min-height: 100vh; 
+    margin: 0; 
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
