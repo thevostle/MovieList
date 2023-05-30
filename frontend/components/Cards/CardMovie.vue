@@ -1,11 +1,10 @@
 <template>
-  <a class="v-cardMovie" :href="link">
+  <NuxtLink class="v-cardMovie" :to="link">
     <img 
         class="v-cardMovie__image" 
-        v-if="imageSrc" 
-        :src="imageSrc"/>
+        :src="imageSrc ?? '/images/logo.png'"/>
     {{ title }}
-  </a>
+  </NuxtLink>
 </template>
 
 <script>
@@ -30,9 +29,12 @@ export default {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    color: white;
+    text-decoration: none;
+    width: 15rem;
 }
 
 .v-cardMovie__image {
-    width: 10rem;
+    width: 100%;
 }
 </style>

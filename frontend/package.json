@@ -8,10 +8,17 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},
+	"overrides": {
+		"vue": "latest"
+	},
 	"devDependencies": {
 		"@nuxtjs/google-fonts": "^3.0.1",
 		"@types/node": "^18",
 		"nuxt": "^3.5.1",
 		"sass": "^1.57.1"
+	},
+	"dependencies": {
+		"@pinia/nuxt": "^0.4.11",
+		"pinia": "^2.1.3"
 	}
 }

@@ -239,16 +239,15 @@ function findMostSimilarArrays(targetArray, arrays) {
 
 // Пример использования функции
 const targetArray = [
-	{ id: 1, value: 4 },
-	{ id: 2, value: 15 },
-	{ id: 4, value: 5 },
+	{ id: 1, value: 8 },
+	{ id: 2, value: 9 },
+	{ id: 4, value: 8 },
 ];
 
 const arrays = [
 	[
-		{ id: 1, value: 70 },
+		{ id: 1, value: 7 },
 		{ id: 2, value: 4 },
-		{ id: 3, value: 9 },
 	],
 	[
 		{ id: 1, value: 2 },
@@ -269,6 +268,17 @@ const arrays = [
 		{ id: 4, value: 6 },
 		{ id: 5, value: 2 },
 		{ id: 6, value: 7 },
+	],
+	[
+		{ id: 1, value: 3 },
+		{ id: 2, value: 3 },
+		{ id: 4, value: 7 },
+	],
+	[
+		{ id: 1, value: 8 },
+		{ id: 2, value: 10 },
+		{ id: 4, value: 7 },
+		{ id: 5, value: 7 },
 	],
 ];
 

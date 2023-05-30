@@ -3,8 +3,12 @@ const User = require('../models/User');
 // Создание нового пользователя
 const createUser = async (req, res) => {
 	try {
-		const { nickname, email, password } = req.body;
-		const user = await User.create({ nickname, email, password });
+		const { username } = req.body;
+		let user = await User.findOne({ username: username });
+		if (!user) {
+			user = await User.create({ username });
+		}
+
 		res.status(201).json(user);
 	} catch (error) {
 		res.status(500).json({ error: 'Не удалось создать пользователя' });
@@ -26,8 +30,8 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
 	try {
 		const { userId } = req.params;
-		const { nickname, email, password } = req.body;
-		const updatedUser = await User.findByIdAndUpdate(userId, { nickname, email, password }, { new: true });
+		const { username } = req.body;
+		const updatedUser = await User.findByIdAndUpdate(userId, { username }, { new: true });
 		res.status(200).json(updatedUser);
 	} catch (error) {
 		res.status(500).json({ error: 'Не удалось обновить данные пользователя' });
@@ -37,12 +41,21 @@ const updateUser = async (req, res) => {
 // Чтение данных о пользователе
 const getUser = async (req, res) => {
 	try {
-		const { userId } = req.params;
-		const user = await User.findById(userId);
+		const { username } = req.params;
+		const user = await User.findOne({username: username});
 		res.status(200).json(user);
 	} catch (error) {
 		res.status(500).json({ error: 'Не удалось получить данные пользователя' });
 	}
 };
 
-module.exports = { createUser, deleteUser, updateUser, getUser };
+const getAllUsers = async (req, res) => {
+	try {
+		const user = await User.find();
+		res.status(200).json(user);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+}
+
+module.exports = { createUser, deleteUser, updateUser, getUser, getAllUsers };

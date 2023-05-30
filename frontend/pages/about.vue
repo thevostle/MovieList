@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    fqfwqfqfwqfwqfq
+    
   </div>
 </template>
 

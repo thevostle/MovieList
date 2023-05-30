@@ -2,7 +2,7 @@
 	<div class="wrapper">
 		<div class="movieInfo__wrapper">
 			<div class="movieInfo__wrapperMain">
-				<img class="movie__posterImage" v-if="imageSrc" :src="imageSrc" />
+				<img class="movie__posterImage" :src="imageSrc ?? '/images/logo.png'" />
 				<h1 class="movieTitle">{{ title }}</h1>
 				<div class="userRatingSelectorWrapper">
 					<div class="userRatingSelector">
@@ -38,10 +38,14 @@
 				<div class="movieRatingCount">оценок пользователей: {{ movieRatingCount }}</div>
 			</div>
 		</div>
+		{{ username }}
 	</div>
 </template>
 
 <script>
+import { mapState } from 'pinia'
+import { useUserDataStore } from '@/store/userData';
+
 export default {
 	data() {
 		return {
@@ -56,14 +60,14 @@ export default {
 			genres: [],
 			directors: [],
 			countries: [],
-			filmId: null,
+			movieId: null,
 			userRating: 0,
 		};
 	},
 	async mounted() {
-		const movieId = this.$route.fullPath.split('/').at(-1)
-		console.log(movieId)
-		const apiUrl = `http://localhost:27017/api/movies/${movieId}`;
+		this.movieId = this.$route.fullPath.split('/').at(-1)
+		console.log(this.movieId)
+		const apiUrl = `http://localhost:27017/api/movies/${this.movieId}`;
 		const requestOptions = {
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' },
@@ -83,6 +87,21 @@ export default {
 				this.genres = data.genres ?? []
 				this.directors = data.directors ?? []
 				this.countries = data.countries ?? []
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+
+		// проверка оценки фильма
+		const apiUrlCheckRating = `http://localhost:27017/api/watch/${this.username}/${this.movieId}`;
+		
+		try {
+			const response = await fetch(apiUrlCheckRating, requestOptions);
+
+			if (response.ok) {
+				const data = await response.json();
+				this.userRating = data
 			}
 		} catch (error) {
 			console.log(error);
@@ -122,11 +141,28 @@ export default {
 					return 'Эпик вин!';
 			}
 		},
+		...mapState(useUserDataStore, ['username'])
 	},
 	methods: {
 		async setUserRating() {
-            alert('Оценка сохранена')
-			await fetch('/');
+			const apiUrl = `http://localhost:27017/api/watch/${this.username}/${this.movieId}/${this.userRating}`;
+
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+			};
+
+			try {
+				const response = await fetch(apiUrl, requestOptions);
+
+				if (response.ok) {
+					const data = response.json();
+					alert('Оценка сохранена')
+				}
+			} catch (error) {
+				console.log(error);
+				alert('Произошла ошибка')
+			}
 		},
 	},
 };

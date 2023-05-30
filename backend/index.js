@@ -26,12 +26,14 @@ app.use(cors());
 app.use(express.json());
 
 // Импортируем маршруты
-//const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
+const watchMovieRoutes = require('./routes/watchMovieRoutes');
 
 // Используем маршруты
-//app.use('/api', userRoutes);
+app.use('/api', userRoutes);
 app.use('/api', movieRoutes);
+app.use('/api', watchMovieRoutes);
 
 // Обработка ошибок
 app.use((err, req, res, next) => {

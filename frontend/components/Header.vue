@@ -3,6 +3,7 @@
 		<div class="v-headerContainer wrapper">
 			<div class="v-header__logoWrapper">
 				<img class="v-header__logoImage" src="/images/logo.png" alt="" />
+				<NuxtLink v-if="getUsername" :to="`/users/${getUsername}`">{{ getUsername }}</NuxtLink>
 			</div>
 			<div class="v-header__linkContainer">
 				<ul class="v-header__linkContainerList">
@@ -16,6 +17,9 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia'
+import { useUserDataStore } from '@/store/userData'
+
 export default {
 	data() {
 		return {
@@ -28,9 +32,19 @@ export default {
 					title: 'About',
 					href: '/about',
 				},
+				{
+					title: 'Auth',
+					href: '/auth',
+				},
 			],
 		};
 	},
+	setup(props) {
+		const storeUserData = useUserDataStore()
+		const { getUsername } = storeToRefs(storeUserData)
+
+    	return { getUsername }
+	}
 };
 </script>
 
