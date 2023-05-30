@@ -29,11 +29,13 @@ app.use(express.json());
 const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const watchMovieRoutes = require('./routes/watchMovieRoutes');
+const recommendationsRoutes = require('./routes/recommendationRoutes');
 
 // Используем маршруты
 app.use('/api', userRoutes);
 app.use('/api', movieRoutes);
 app.use('/api', watchMovieRoutes);
+app.use('/api', recommendationsRoutes);
 
 // Обработка ошибок
 app.use((err, req, res, next) => {
