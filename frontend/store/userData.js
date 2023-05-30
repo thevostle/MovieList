@@ -4,7 +4,7 @@ export const useUserDataStore = defineStore({
 	id: 'userData',
 	state: () => {
 		return {
-			username: 'gw'
+			username: 'admin'
 		};
 	},
 	actions: {

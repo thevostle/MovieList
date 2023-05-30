@@ -25,15 +25,15 @@ export default {
 		return {
 			links: [
 				{
-					title: 'Home',
+					title: 'Главная',
 					href: '/',
 				},
 				{
-					title: 'About',
-					href: '/about',
+					title: 'Рекомендации',
+					href: '/recomendation',
 				},
 				{
-					title: 'Auth',
+					title: 'Вход',
 					href: '/auth',
 				},
 			],

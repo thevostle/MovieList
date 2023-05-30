@@ -16,7 +16,7 @@
                 </div>
                 <div class="userProfile__watchedMovieWrapper" v-for="(movie, index) in movies" :key="index">
                   <div class="userProfile__watchedMovieTitleWrapper">
-                    <div class="userProfile__watchedMovieIndex">{{ index }}</div>
+                    <div class="userProfile__watchedMovieIndex">{{ index + 1 }}</div>
                     <NuxtLink class="userProfile__watchedMovieTitle" :to="`/movies/${movie.movieId._id}`">{{ movie.movieId.title }}</NuxtLink>
                   </div>
                   <div class="userProfile__watchedMovieRating">{{ movie.rating }}</div>
