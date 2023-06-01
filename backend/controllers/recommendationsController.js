@@ -20,7 +20,7 @@ function findMostSimilarArrays(targetArray, arrays) {
 		return similarityA - similarityB;
 	});
 
-	return sortedArrays.slice(0, 3);
+	return sortedArrays.slice(0, 5);
 }
 
 function filterAndAverage(array1, array2) {
@@ -53,11 +53,10 @@ function filterAndAverage(array1, array2) {
 				if (arrayItem.movieId.toString() == userItem.movieId.toString()) {
 					flag = true;
 				}
-				
-			}if (!flag) {
-					result.push(arrayItem);
-					break;
-				}
+			} if (!flag) {
+				result.push(arrayItem);
+				break;
+			}
 		}
 	}
 
